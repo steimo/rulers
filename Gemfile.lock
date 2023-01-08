@@ -4,7 +4,7 @@ PATH
     rulers (0.1.0)
       erubis
       multi_json
-      rack (~> 2.2)
+      rack
       sqlite3
 
 GEM
@@ -24,9 +24,9 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
-  minitest (~> 5.0)
+  minitest
   rack-test
-  rake (~> 10.0)
+  rake
   rulers!
 
 BUNDLED WITH
