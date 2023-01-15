@@ -3,6 +3,7 @@
 require "rulers/array"
 require "rulers/routing"
 require "rulers/util"
+require "rulers/file_model"
 require "rulers/controller"
 require "rulers/dependencies"
 require_relative "rulers/version"
@@ -27,9 +28,8 @@ module Rulers
         text = controller.send(act)
         [200, { "Content-Type" => "text/html" },
          [text]]
-      rescue StandardError
-        [500,
-         { "Content-Type" => "text/html" }, ["Oh no, something wrong just happened!"]]
+      rescue StandardError => e
+        puts e
       end
     end
   end
