@@ -19,18 +19,22 @@ module Rulers
       elsif env["PATH_INFO"] == "/"
         return [200,
                 { "Content-Type" => "text/html" }, [File.read("./public/index.html")]]
-        # return [302, { 'Location' => "/quotes/a_quote" }, []]
       end
 
       klass, act = get_controller_and_action(env)
       controller = klass.new(env)
-      begin
-        text = controller.send(act)
-        [200, { "Content-Type" => "text/html" },
-         [text]]
-      rescue StandardError => e
-        puts e
-      end
+      text = begin
+               result = controller.send(act)
+               if controller.rendered?
+                 result
+               else
+                 controller.render(act)
+               end
+             rescue StandardError => e
+               puts e
+             end
+      [200,
+       { "Content-Type" => "text/html" }, [text]]
     end
   end
 end
