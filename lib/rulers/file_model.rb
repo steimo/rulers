@@ -67,9 +67,7 @@ module Rulers
             model[key] == match_value
           end
         end
-
       end
-
     end
   end
 end

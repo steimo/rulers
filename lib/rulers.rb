@@ -24,15 +24,15 @@ module Rulers
       klass, act = get_controller_and_action(env)
       controller = klass.new(env)
       text = begin
-               result = controller.send(act)
-               if controller.rendered?
-                 result
-               else
-                 controller.render(act)
-               end
-             rescue StandardError => e
-               puts e
-             end
+        result = controller.send(act)
+        if controller.rendered?
+          result
+        else
+          controller.render(act)
+        end
+      rescue StandardError => e
+        puts e
+      end
       [200,
        { "Content-Type" => "text/html" }, [text]]
     end
