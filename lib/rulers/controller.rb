@@ -21,6 +21,20 @@ module Rulers
       request.params
     end
 
+    def response(text, status = 200, headers = {})
+      raise "Already responded!" if @response
+      body = [text].flatten
+      @response = Rack::Response.new(body, status, headers)
+    end
+
+    def get_response # Only for Rulers
+      @response
+    end
+
+    def render_response(*args)
+      response(render(*args))
+    end
+
     def rendered?
       @called_render_explicitly
     end
